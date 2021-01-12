@@ -2,7 +2,9 @@ package com.udemy.projetospring.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.udemy.projetospring.entities.enums.PedidoStatus;
@@ -30,6 +33,9 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Usuario client;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<PedidoItem> itens = new HashSet<>();
 
     public Pedido() {
     }

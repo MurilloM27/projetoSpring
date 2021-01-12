@@ -5,10 +5,12 @@ import java.util.Arrays;
 
 import com.udemy.projetospring.entities.Categoria;
 import com.udemy.projetospring.entities.Pedido;
+import com.udemy.projetospring.entities.PedidoItem;
 import com.udemy.projetospring.entities.Produto;
 import com.udemy.projetospring.entities.Usuario;
 import com.udemy.projetospring.entities.enums.PedidoStatus;
 import com.udemy.projetospring.repositories.CategoriaRepository;
+import com.udemy.projetospring.repositories.PedidoItemRepository;
 import com.udemy.projetospring.repositories.PedidoRepository;
 import com.udemy.projetospring.repositories.ProdutoRepository;
 import com.udemy.projetospring.repositories.UsuarioRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private PedidoItemRepository pedidoItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -67,6 +72,13 @@ public class TestConfig implements CommandLineRunner {
         p5.getCategorias().add(cat2);
 
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+        PedidoItem oi1 = new PedidoItem(o1, p1, 2, p1.getPreco());
+        PedidoItem oi2 = new PedidoItem(o1, p3, 1, p3.getPreco());
+        PedidoItem oi3 = new PedidoItem(o2, p3, 2, p3.getPreco());
+        PedidoItem oi4 = new PedidoItem(o3, p5, 2, p5.getPreco());
+
+        pedidoItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
         
     }
 
