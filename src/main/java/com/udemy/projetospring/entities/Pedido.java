@@ -11,13 +11,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.udemy.projetospring.entities.enums.PedidoStatus;
+
 @Entity
 @Table(name = "tb_order")
 public class Pedido {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant momento;
+
+    private Integer pedidoStatus;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -26,10 +31,19 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Long id, Instant momento, Usuario client) {
+    public Pedido(Long id, Instant momento, PedidoStatus pedidoStatus, Usuario client) {
         this.id = id;
         this.momento = momento;
+        setPedidoStatus(pedidoStatus);
         this.client = client;
+    }
+
+    public PedidoStatus getPedidoStatus() {
+        return PedidoStatus.valueOf(pedidoStatus);
+    }
+
+    public void setPedidoStatus(PedidoStatus pedidoStatus) {
+        this.pedidoStatus = pedidoStatus.getCodigo();
     }
 
     public Long getId() {
