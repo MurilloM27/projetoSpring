@@ -1,5 +1,6 @@
 package com.udemy.projetospring.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -15,8 +16,10 @@ import com.udemy.projetospring.entities.enums.PedidoStatus;
 
 @Entity
 @Table(name = "tb_order")
-public class Pedido {
+public class Pedido implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
