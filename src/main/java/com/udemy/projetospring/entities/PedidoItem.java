@@ -30,6 +30,7 @@ public class PedidoItem implements Serializable{
         this.preco = preco;
     }
 
+    
     public Produto getProduto(){
         return id.getProduto();
     }
