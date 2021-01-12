@@ -47,6 +47,10 @@ public class Pedido implements Serializable {
         this.client = client;
     }
 
+    public Set<PedidoItem> getItens() {
+        return itens;
+    }
+
     public PedidoStatus getPedidoStatus() {
         return PedidoStatus.valueOf(pedidoStatus);
     }
