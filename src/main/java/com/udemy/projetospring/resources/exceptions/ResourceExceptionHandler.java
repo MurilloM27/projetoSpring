@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.udemy.projetospring.services.exceptions.DatabaseException;
 import com.udemy.projetospring.services.exceptions.RecursoNaoEncontradoException;
 
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,14 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> resourceNotFound(RecursoNaoEncontradoException e, HttpServletRequest request){
         String error = "Resource not Found";
         HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(Instant.now(), status.toString(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<StandardError> resourceNotFound(DatabaseException e, HttpServletRequest request){
+        String error = "Resource not Found";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError(Instant.now(), status.toString(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
