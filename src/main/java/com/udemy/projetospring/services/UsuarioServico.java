@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.udemy.projetospring.entities.Usuario;
 import com.udemy.projetospring.repositories.UsuarioRepository;
+import com.udemy.projetospring.services.exceptions.RecursoNaoEncontradoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class UsuarioServico {
 
     public Usuario findById(Long id){
         Optional<Usuario> usuario = usuarioRepository.findById(id);
-        return usuario.get();
+        return usuario.orElseThrow(() -> new RecursoNaoEncontradoException(id));
     }
 
     public Usuario adicionarUsuario(Usuario usuario){
